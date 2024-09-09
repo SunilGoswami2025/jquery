@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Admin Panel Dashboard" />
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="style1.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+<style >
+
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     text-decoration: none;
+     list-style: none;
+ }
+
+ /* side bar css start */
+ .sidebar {
+     height: 100vh;
+     width: 250px;
+     background: #fff;
+     position: fixed;
+     transition: transform 0.6s ease;
+     box-shadow: 0 0 10px #ccc;
+ }
+
+ .sidebar.hidden {
+     transform: translateX(-100%);
+ }
+
+ .side-bar .logo {
+     text-align: center;
+     margin-bottom: 50px;
+ }
+
+ .side-bar .logo a h1 {
+     font-size: 33px;
+     color:#B576F6;
+     font-family: "rightous";
+     padding: 10px 10px;
+ }
+
+ .side-bar .nam-pos h4 {
+     color: #ccc;
+     padding: 0 14px;
+ }
+
+ .side-bar .nam-pos h2 {
+     padding: 0 14px;
+     margin-top: 30px;
+ }
+
+ .side-bar .side-bar-nav ul li a {
+     display: flex;
+     align-items: center;
+     padding: 15px 5px;
+     margin: 10px;
+     width: 100%;
+     transition: 0.4s;
+ }
+
+ .side-bar .side-bar-nav ul li a :hover {
+     background-color:#B576F6;
+     color: #fff;
+     padding: 10px 20px;
+     border-radius: 6px;
+ }
+
+ .side-bar .side-bar-nav ul li a .nav-link {
+     margin-left: 10px;
+ }
+
+ /* side bar css end */
+
+ /* header css start */
+ header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     height: 8vh;
+     background:#B576F6;
+     margin-left: 250px;
+     padding: 0 30px;
+     transition: margin-left 0.6s ease;
+     color: white;
+ }
+
+ .logo {
+     display: flex;
+     align-items: center;
+     gap: 20px;
+ }
+
+ .logo i {
+     cursor: pointer;
+ }
+
+ header .head-inner {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+
+ header .head-inner .right-part form {
+     width: 300px;
+     height: 45px;
+     position: relative;
+ }
+
+ header .head-inner .right-part form input {
+     width: 91%;
+     height: 80%;
+     border: none;
+     box-shadow: 0 0 0px rgb(223, 223, 223);
+     padding: 7px 7px;
+     margin-left: 25px;
+     border-radius: 10px;
+ }
+
+ header .head-inner .right-part form input:focus {
+     box-shadow: 0 0 8px #ccc;
+ }
+
+ header .head-inner .right-part form button {
+     position: absolute;
+     top: 0;
+     right: 0;
+     width: 15%;
+     height: 79%;
+     padding-top: 5px;
+     text-align: center;
+     font-size: 20px;
+     color: #fff;
+     background-color: #ccc;
+     border: none;
+     cursor: pointer;
+     border-radius: 10px;
+ }
+
+ header .head-inner .left-part ul {
+     display: flex;
+     align-items: center;
+ }
+
+ header .head-inner .left-part ul li {
+     margin: 30px;
+ }
+
+ header .head-inner .left-part ul li .profile {
+     display: flex;
+     align-items: center;
+ }
+
+ header .head-inner .left-part ul li {
+     cursor: pointer;
+ }
+
+ header .head-inner .left-part ul li span i {
+     font-size: 22px;
+ }
+
+ header .head-inner .left-part ul li span i :hover {
+     color:#B576F6;
+ }
+
+ header .head-inner .left-part ul li .hve-dots span {
+     position: relative;
+ }
+
+ header .head-inner .left-part ul li .hve-dots span::before {
+     content: "";
+     position: absolute;
+     top: -7px;
+     width: 8px;
+     right: -7px;
+     height: 8px;
+     background: #B576F6;
+     border-radius: 50px;
+ }
+
+ /* header css end */
+
+ /* main content start */
+ .main-content {
+     margin: 15px;
+     margin-left: 275px;
+     padding: 15px;
+     box-shadow: 0 0 8px #ccc;
+     transition: margin-left 0.6s ease;
+ }
+
+ .shifted {
+     margin-left: 0;
+ }
+
+ .main-content .para {
+     margin: 0%;
+ }
+
+ .main-content .info-card {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-wrap: wrap;
+     margin: 20px 0;
+ }
+
+ .main-content .info-card .card {
+     width: 23%;
+     min-height: 150px;
+     padding: 50px;
+     background:linear-gradient(to left, #B576f6, #9a4fe9);;
+     border-radius: 10px;
+     color: #fff;
+     margin-left: 100px;
+     position: relative;
+ }
+
+ .main-content .info-card .card:nth-child(2) {
+     background:linear-gradient(to left, #6AA5E3, #6866E9);
+ }
+
+ .main-content .info-card .card:nth-child(3) {
+     background:linear-gradient(to left, #FEB683, #FF8993) ;
+ }
+
+ .main-content .info-card .card::before,
+ .main-content .info-card .card::after {
+     content: "";
+     position: absolute;
+     top: -5%;
+     right: -5%;
+     width: 100px;
+     height: 100px;
+     background-color: rgb(255, 255, 255, 0.2);
+     border-radius: 100%;
+ }
+
+ .main-content .info-card .card .card-icons {
+     margin-bottom: 10px;
+     width: 70px;
+     height: 70px;
+     background-color: rgb(255, 255, 255, 0.4);
+     border-radius: 50%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     box-shadow: 0 0 8px #ccc;
+ }
+
+ .main-content .info-card .card .card-icons span i {
+     font-size: 29px;
+ }
+
+ .main-content .info-card .card .card-details {
+     margin-bottom: 10px;
+     margin-top: 25px;
+ }
+
+ /* counter js css start */
+ #counter {
+     text-align: center;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background: #ccc;
+     padding: 40px 0px;
+     width: 100%;
+ }
+
+ #counter .item {
+     background: #fff;
+     width: 200px;
+     padding: 35px 40px;
+     margin: 10px;
+     text-align: center;
+     border-radius: 20px;
+     -webkit-box-shadow: 0px 0px 38px -8px rgba(0, 0, 0, 0.34);
+     -moz-box-shadow: 0px 0px 38px -8px rgba(0, 0, 0, 0.34);
+     box-shadow: 0px 0px 38px -8px rgba(0, 0, 0, 0.34);
+ }
+
+ #counter .item .count {
+     color: #e8b12d;
+     margin-bottom: 5px;
+     font-size: 40px;
+ }
+
+ #counter .item h3 {
+     color: #4f4e28;
+     text-transform: capitalize;
+ }
+
+ /* counter css end */
+ /* main content end */
+
+ /* calender css start */
+
+ .sec_cal {
+     width: 360px;
+     margin: 0 auto;
+     font-family: "NotoSansR";
+ }
+
+ .sec_cal .cal_nav {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-weight: 700;
+     font-size: 48px;
+     line-height: 78px;
+ }
+
+ .sec_cal .cal_nav .year-month {
+     width: 300px;
+     text-align: center;
+     line-height: 1;
+ }
+
+ .sec_cal .cal_nav .nav {
+     display: flex;
+     border: 1px solid #333333;
+     border-radius: 5px;
+ }
+
+ .sec_cal .cal_nav .go-prev,
+ .sec_cal .cal_nav .go-next {
+     display: block;
+     width: 50px;
+     height: 78px;
+     font-size: 0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .sec_cal .cal_nav .go-prev::before,
+ .sec_cal .cal_nav .go-next::before {
+     content: "";
+     display: block;
+     width: 20px;
+     height: 20px;
+     border: 3px solid #000;
+     border-width: 3px 3px 0 0;
+     transition: border 0.1s;
+ }
+
+ .sec_cal .cal_nav .go-prev:hover::before,
+ .sec_cal .cal_nav .go-next:hover::before {
+     border-color: #1a6858;
+ }
+
+ .sec_cal .cal_nav .go-prev::before {
+     transform: rotate(-135deg);
+ }
+
+ .sec_cal .cal_nav .go-next::before {
+     transform: rotate(45deg);
+ }
+
+ .sec_cal .cal_wrap {
+     padding-top: 40px;
+     position: relative;
+     margin: 0 auto;
+ }
+
+ .sec_cal .cal_wrap .days {
+     display: flex;
+     margin-bottom: 20px;
+     padding-bottom: 20px;
+     border-bottom: 1px solid #ddd;
+ }
+
+ .sec_cal .cal_wrap::after {
+     top: 368px;
+ }
+
+ .sec_cal .cal_wrap .day {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: calc(100% / 7);
+     text-align: left;
+     color: #999;
+     font-size: 12px;
+     text-align: center;
+     border-radius: 5px;
+ }
+
+ .current.today {
+     background: rgb(242 242 242);
+ }
+
+ .sec_cal .cal_wrap .dates {
+     display: flex;
+     flex-flow: wrap;
+     height: 290px;
+ }
+
+ .sec_cal .cal_wrap .day:nth-child(7n -1) {
+     color: #1a6858;
+ }
+
+ .sec_cal .cal_wrap .day:nth-child(7n) {
+     color: #1a6858;
+ }
+
+ .sec_cal .cal_wrap .day.disable {
+     color: #1a6858;
+ }
+
+ /* .sec_cal .hide {
+     margin: 0%;
+ } */
+
+</style>
+  </head>
+  <body>
+    <!-- Sidebar HTML Start -->
+    <div class="sidebar">
+      <div class="side-bar">
+        <div class="logo">
+          <a href="#"><h1>ADMINPANEL</h1></a>
+        </div>
+        <div class="nam-pos">
+          <h2>Admin Panel</h2>
+          <h4>Company Head</h4>
+        </div>
+        <nav class="side-bar-nav">
+          <ul>
+            <li>
+              <a href="#">
+                <span><i class="fas fa-home"></i></span>
+                <span class="nav-link">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="fab fa-uikit"></i></span>
+                <span class="nav-link">UI Elements</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="fab fa-wpforms"></i></span>
+                <span class="nav-link">Form Stuff</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="fas fa-table"></i></span>
+                <span class="nav-link">Data Table</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="fas fa-cubes"></i></span>
+                <span class="nav-link">Components</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="far fa-chart-bar"></i></span>
+                <span class="nav-link">Chart</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="fas fa-sign-out-alt"></i></span>
+                <span class="nav-link">Log Out</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- Sidebar HTML End -->
+
+    <!-- Header Start -->
+    <header>
+      <div class="logo">
+        <i class="fa-solid fa-bars" id="toggle-btn"></i>
+        <h1>Logo</h1>
+      </div>
+      <div class="head-inner">
+        <div class="right-part">
+          <form>
+            <input type="text" placeholder="Search..." />
+            <button><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+        <div class="left-part">
+          <ul>
+            <li>
+              <div class="profile">
+                <div class="avatar-name">
+                  <h3>ADMINPANEL</h3>
+                </div>
+              </div>
+            </li>
+            <li class="hve-dots">
+              <span><i class="far fa-envelope"></i></span>
+            </li>
+            <li class="hve-dots">
+              <span><i class="far fa-bell"></i></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Main Content Start -->
+    <div class="main-content">
+      <div class="info-card">
+        <div class="card">
+          <div class="card-icons">
+            <span><i class="fas fa-layer-group"></i></span>
+          </div>
+          <div class="card-details">
+            <h4>TOTAL STOCK</h4>
+            <h2>$150,000</h2>
+          </div>
+          <p>Increased By 60%</p>
+        </div>
+        <div class="card">
+          <div class="card-icons">
+            <span><i class="fas fa-money-check-alt"></i></span>
+          </div>
+          <div class="card-details">
+            <h4>TOTAL PROFIT</h4>
+            <h2>$ 50,000</h2>
+          </div>
+          <p>Increased By 50%</p>
+        </div>
+        <div class="card">
+          <div class="card-icons">
+            <span><i class="fas fa-male"></i></span>
+          </div>
+          <div class="card-details">
+            <h4>Unique visitors</h4>
+            <h2>25,000</h2>
+          </div>
+          <p>Increased By 40%</p>
+        </div>
+      </div>
+
+      <!-- Chart HTML Start -->
+      <div class="chart">
+        <canvas id="myChart" width="800" height="200"></canvas>
+      </div>
+      <!-- Chart HTML End -->
+
+      <!-- Maps HTML Start -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14686.358966777329!2d72.5510106493056!3d23.03883101659463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84f521640d4b%3A0x6853ee97a9a2996b!2sNavrangpura%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1725449045452!5m2!1sen!2sin"
+        width="1200"
+        height="450"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+      <!-- Maps HTML End -->
+
+      <!-- Calendar HTML Start -->
+      <div class="sec_cal">
+        <div class="cal_nav">
+          <a href="javascript:;" class="nav-btn go-prev">Prev</a>
+          <div class="year-month"></div>
+          <a href="javascript:;" class="nav-btn go-next">Next</a>
+        </div>
+        <div class="cal_wrap">
+          <div class="days">
+            <div class="day">MON</div>
+            <div class="day">TUE</div>
+            <div class="day">WED</div>
+            <div class="day">THU</div>
+            <div class="day">FRI</div>
+            <div class="day">SAT</div>
+            <div class="day">SUN</div>
+          </div>
+          <div class="dates"></div>
+        </div>
+      </div>
+      <!-- Calendar End -->
+    </div>
+    <!-- Main Content End -->
+  </body>
+</html>
+
+<script>
+  $(document).ready(function () {
+    $("#toggle-btn").click(function () {
+      $(".sidebar").toggleClass("hidden");
+      $("header").toggleClass("shifted");
+      $(".main-content").toggleClass("shifted");
+    });
+  });
+
+ 
+
+  // chart js start//
+
+  var ctx = document.getElementById("myChart").getContext("2d");
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: "line", // also try bar or other graph types
+
+    // The data for our dataset
+    data: {
+      labels: [
+        "Jun 2016",
+        "Jul 2016",
+        "Aug 2016",
+        "Sep 2016",
+        "Oct 2016",
+        "Nov 2016",
+        "Dec 2016",
+        "Jan 2017",
+        "Feb 2017",
+        "Mar 2017",
+        "Apr 2017",
+        "May 2017"
+      ],
+      // Information about the dataset
+      datasets: [
+        {
+          label: "Rainfall",
+          backgroundColor: "lightblue",
+          borderColor: "royalblue",
+          data: [
+            26.4, 39.8, 66.8, 66.4, 40.6, 55.2, 77.4, 69.8, 57.8, 76, 110.8,
+            142.6
+          ]
+        }
+      ]
+    },
+
+    // Configuration options
+    options: {
+      layout: {
+        padding: 10
+      },
+      legend: {
+        position: "bottom"
+      },
+      title: {
+        display: true,
+        text: "Precipitation in Toronto"
+      },
+      scales: {
+        yAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: "Precipitation in mm"
+            }
+          }
+        ],
+        xAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: "Month of the Year"
+            }
+          }
+        ]
+      }
+    }
+  });
+  // chart js end//
+
+  // calender js start //
+
+  $(document).ready(function () {
+    calendarInit();
+  });
+
+  function calendarInit() {
+    var date = new Date();
+    var utc = date.getTime() + date.getTimezoneOffset() * 60 * 1000;
+    var kstGap = 9 * 60 * 60 * 1000;
+    var today = new Date(utc + kstGap);
+    var thisMonth = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+
+    var currentYear = thisMonth.getFullYear();
+    var currentMonth = thisMonth.getMonth();
+    var currentDate = thisMonth.getDate();
+
+    // console.log(thisMonth);
+
+    renderCalender(thisMonth);
+
+    function renderCalender(thisMonth) {
+      currentYear = thisMonth.getFullYear();
+      currentMonth = thisMonth.getMonth();
+      currentDate = thisMonth.getDate();
+
+      var startDay = new Date(currentYear, currentMonth, 0);
+      var prevDate = startDay.getDate();
+      var prevDay = startDay.getDay();
+
+      var endDay = new Date(currentYear, currentMonth + 1, 0);
+      var nextDate = endDay.getDate();
+      var nextDay = endDay.getDay();
+
+      // console.log(prevDate, prevDay, nextDate, nextDay);
+
+      $(".year-month").text(currentYear + "." + (currentMonth + 1));
+
+      calendar = document.querySelector(".dates");
+      calendar.innerHTML = "";
+
+      for (var i = prevDate - prevDay + 1; i <= prevDate; i++) {
+        calendar.innerHTML =
+          calendar.innerHTML + '<div class="day prev disable">' + i + "</div>";
+      }
+
+      for (var i = 1; i <= nextDate; i++) {
+        calendar.innerHTML =
+          calendar.innerHTML + '<div class="day current">' + i + "</div>";
+      }
+
+      for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
+        calendar.innerHTML =
+          calendar.innerHTML + '<div class="day next disable">' + i + "</div>";
+      }
+
+      if (today.getMonth() == currentMonth) {
+        todayDate = today.getDate();
+        var currentMonthDate = document.querySelectorAll(".dates .current");
+        currentMonthDate[todayDate - 1].classList.add("today");
+      }
+    }
+
+    $(".go-prev").on("click", function () {
+      thisMonth = new Date(currentYear, currentMonth - 1, 1);
+      renderCalender(thisMonth);
+    });
+
+    $(".go-next").on("click", function () {
+      thisMonth = new Date(currentYear, currentMonth + 1, 1);
+      renderCalender(thisMonth);
+    });
+  }
+
+  //calender js end //
+</script>
